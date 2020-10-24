@@ -2,13 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KioskWebWizard.Models;
+using KioskWebWizard.Services.Interfaces;
+using KioskWebWizard.ViewModel.Kiosk;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KioskWebWizard.Controllers
 {
     public class KioskController : Controller
     {
+        private readonly IKioskService _kioskService;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public KioskController(IKioskService kioskService, UserManager<IdentityUser> userManager)
+        {
+            _kioskService = kioskService;
+            _userManager = userManager;
+        }
+
         // GET: KioskController
         public ActionResult Index()
         {
@@ -22,6 +35,7 @@ namespace KioskWebWizard.Controllers
         }
 
         // GET: KioskController/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -30,36 +44,71 @@ namespace KioskWebWizard.Controllers
         // POST: KioskController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(KioskCreateViewModel kioskCreateViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var model = new KioskModel
+                    {
+                        KioskTemplate = kioskCreateViewModel.KioskTemplate,
+                        Name = kioskCreateViewModel.Name,
+                        UserId = _userManager.GetUserId(User),
+                    };
+                    _kioskService.Create(model);
+                    return RedirectToAction("Details", new { id = model.ID });
+                }
+                catch
+                {
+                    return View(kioskCreateViewModel);
+                }
             }
-            catch
+            else
             {
-                return View();
+                return View(kioskCreateViewModel);
             }
         }
 
         // GET: KioskController/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var kioskToBeEdited = _kioskService.Get(id);
+            KioskEditViewModel kioskEditViewModel = new KioskEditViewModel
+            {
+                ID = kioskToBeEdited.ID,
+                Name = kioskToBeEdited.Name,
+                KioskTemplate = kioskToBeEdited.KioskTemplate,
+            };
+            return View(kioskEditViewModel);
         }
 
         // POST: KioskController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, KioskEditViewModel kioskEditViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var kioskModel = _kioskService.Get(kioskEditViewModel.ID);
+                    kioskModel.ID = kioskEditViewModel.ID;
+                    kioskModel.Name = kioskEditViewModel.Name;
+                    kioskModel.KioskTemplate = kioskEditViewModel.KioskTemplate;
+
+                    _kioskService.Update(kioskModel);
+                    return RedirectToAction("Details", new { id = kioskEditViewModel.ID });
+                }
+                catch
+                {
+                    return View(kioskEditViewModel);
+                }
             }
-            catch
+            else
             {
-                return View();
+                return View(kioskEditViewModel);
             }
         }
 

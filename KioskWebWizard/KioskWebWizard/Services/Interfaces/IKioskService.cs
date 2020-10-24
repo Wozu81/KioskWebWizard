@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KioskWebWizard.Services.Interfaces
 {
-    interface IKioskService
+    public interface IKioskService
     {
         bool Create(KioskModel kiosk);
         KioskModel Get(int id);
