@@ -11,6 +11,5 @@ namespace KioskWebWizard.ViewModel.Kiosk
         public int ID { get; set; }
         [Display(Name = "Nazwa Kiosku")]
         public string Name { get; set; }
-        public bool IsOkToDelete { get; set; }
     }
 }

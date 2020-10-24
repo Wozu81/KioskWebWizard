@@ -23,20 +23,30 @@ namespace KioskWebWizard.Controllers
         }
 
         // GET: KioskController
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+            var kiosksList = _kioskService.GetAll();
+            List<KioskListViewModel> kioskListViewModel = new List<KioskListViewModel>();
+            foreach (var plan in kiosksList)
+            {
+                kioskListViewModel.Add(new KioskListViewModel
+                {
+                    ID = plan.ID,
+                    Name = plan.Name
+                });
+            }
+            return View(kioskListViewModel);
         }
 
         // GET: KioskController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
             return View();
         }
 
         // GET: KioskController/Create
         [HttpGet]
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -44,7 +54,7 @@ namespace KioskWebWizard.Controllers
         // POST: KioskController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(KioskCreateViewModel kioskCreateViewModel)
+        public IActionResult Create(KioskCreateViewModel kioskCreateViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +82,7 @@ namespace KioskWebWizard.Controllers
 
         // GET: KioskController/Edit/5
         [HttpGet]
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             var kioskToBeEdited = _kioskService.Get(id);
             KioskEditViewModel kioskEditViewModel = new KioskEditViewModel
@@ -87,7 +97,7 @@ namespace KioskWebWizard.Controllers
         // POST: KioskController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, KioskEditViewModel kioskEditViewModel)
+        public IActionResult Edit(int id, KioskEditViewModel kioskEditViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -113,24 +123,24 @@ namespace KioskWebWizard.Controllers
         }
 
         // GET: KioskController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return View();
+            var deleteKiosk = _kioskService.Get(id);
+            KioskDeleteViewModel kioskDeleteViewModel = new KioskDeleteViewModel
+            {
+                ID = deleteKiosk.ID,
+                Name = deleteKiosk.Name,
+            };
+            return View(kioskDeleteViewModel);
         }
 
         // POST: KioskController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult ConfirmDelete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _kioskService.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
