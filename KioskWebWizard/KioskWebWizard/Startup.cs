@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KioskWebWizard.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,16 +16,33 @@ namespace KioskWebWizard
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        protected IConfigurationRoot Configuration;
+        public Startup()
         {
-            Configuration = configuration;
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.AddXmlFile("appsettings.xml");
+            Configuration = configurationBuilder.Build();
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<KioskWebWizardContext>(builder =>
+            {
+                var config = Configuration["ConnectionString"];
+                builder.UseSqlServer(config);
+            });
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<KioskWebWizardContext>();
+            //services.AddScoped<IPlanService, PlanService>();
+            //services.AddScoped<IRecipeService, RecipeService>();
+            //services.AddScoped<IDashboardService, DashboardService>();
+
+            //services.AddMvc(options =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder()
+            //        .RequireAuthenticatedUser().Build();
+            //    options.Filters.Add(new AuthorizeFilter(policy));
+            //});
             services.AddControllersWithViews();
         }
 
@@ -44,6 +64,7 @@ namespace KioskWebWizard
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
