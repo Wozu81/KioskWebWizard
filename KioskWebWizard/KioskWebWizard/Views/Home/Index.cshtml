@@ -1,17 +1,18 @@
-﻿@{
+﻿@model KioskWebWizard.ViewModel.Home.IndexViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 @if (User.Identity.IsAuthenticated)
 {
-    <p>Number of opened projects: xxx</p>
+    <p>Number of opened projects: @Model.NumberOfKiosks</p>
     <p><a asp-action="Create" asp-controller="Kiosk">Create new Kiosk</a></p>
     <p><a asp-action="List" asp-controller="Kiosk">List all Kiosk Projects</a></p>
 }
-else
-{
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-}
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+

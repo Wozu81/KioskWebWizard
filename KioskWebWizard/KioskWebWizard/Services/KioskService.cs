@@ -1,6 +1,7 @@
 ﻿using KioskWebWizard.Context;
 using KioskWebWizard.Models;
 using KioskWebWizard.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace KioskWebWizard.Services
     public class KioskService : IKioskService
     {
         private readonly KioskWebWizardContext _context;
+        public KioskService(KioskWebWizardContext context)
+        {
+            _context = context;
+        }
+
         public bool Create(KioskModel kiosk)
         {
             _context.Kiosks.Add(kiosk);
@@ -27,7 +33,8 @@ namespace KioskWebWizard.Services
         }
         public int GetNumberOfKiosks(string userName)
         {
-            return _context.Kiosks.Where(x => x.IdentityUser.UserName == userName).Count();
+            var a = _context.Kiosks.Where(x => x.IdentityUser.UserName == userName).Count();
+            return a;
         }
         public bool Update(KioskModel kiosk)
         {
@@ -42,5 +49,9 @@ namespace KioskWebWizard.Services
             return _context.SaveChanges() > 0;
         }
 
+        public SelectList GetKioskTemplateList()
+        {
+            return new SelectList(_context.KioskTemplates, "ID", "Name");
+        }
     }
 }

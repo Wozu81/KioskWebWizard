@@ -6,21 +6,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KioskWebWizard.Models;
+using KioskWebWizard.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using KioskWebWizard.ViewModel.Home;
 
 namespace KioskWebWizard.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IKioskService _kioskService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IKioskService kioskService, UserManager<IdentityUser> userManager)
         {
-            _logger = logger;
+            _kioskService = kioskService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = new IndexViewModel
+            {
+                NumberOfKiosks = _kioskService.GetNumberOfKiosks(_userManager.GetUserId(User))
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()

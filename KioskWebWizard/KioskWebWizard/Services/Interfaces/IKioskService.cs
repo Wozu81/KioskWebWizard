@@ -1,4 +1,5 @@
 ﻿using KioskWebWizard.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace KioskWebWizard.Services.Interfaces
         bool Create(KioskModel kiosk);
         KioskModel Get(int id);
         IList<KioskModel> GetAll();
-        public int GetNumberOfKiosks(string userName);
+        int GetNumberOfKiosks(string userName);
         bool Update(KioskModel kiosk);
         bool Delete(int id);
+        SelectList GetKioskTemplateList();
     }
 }

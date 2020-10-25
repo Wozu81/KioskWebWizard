@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using KioskWebWizard.Models;
+using KioskWebWizard.ViewModel.Kiosk;
 
 namespace KioskWebWizard.Context
 {

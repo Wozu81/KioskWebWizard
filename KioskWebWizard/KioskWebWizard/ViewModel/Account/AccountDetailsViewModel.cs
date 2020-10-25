@@ -13,6 +13,6 @@ namespace KioskWebWizard.ViewModel.Account
         public string Name { get; set; }
         [Required]
         public string Surname { get; set; }
-
+        public int NumberOfKiosks { get; set; }
     }
 }

@@ -48,6 +48,7 @@ namespace KioskWebWizard.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["KioskTemplate"] = _kioskService.GetKioskTemplateList();
             return View();
         }
 
