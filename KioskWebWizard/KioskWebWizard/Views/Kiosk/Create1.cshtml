@@ -1,0 +1,61 @@
+﻿@model KioskWebWizard.ViewModel.Kiosk.KioskCreateViewModel1
+
+@{
+    ViewData["Title"] = "Create1";
+}
+
+<h2>Podaj dane dotyczące kiosku dla programu lojalnościowego</h2>
+<hr />
+<div class="table text-md-center d-flex justify-content-center pt-lg-5">
+    <div class="col-md-4">
+        <form asp-action="Create1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LoyaltyName" class="control-label">Nazwa programu lojalnościowego</label>
+                <input asp-for="LoyaltyName" class="form-control" />
+                <span asp-validation-for="LoyaltyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyDescription" class="control-label">Opis programu lojalnościowego</label>
+                <input asp-for="LoyaltyDescription" class="form-control" />
+                <span asp-validation-for="LoyaltyDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyCarouselData1" class="control-label">Pozycja numer 1 informacji wyświetlanych na stronie startowej</label>
+                <input asp-for="LoyaltyCarouselData1" class="form-control" />
+                <span asp-validation-for="LoyaltyCarouselData1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyCarouselData2" class="control-label">Pozycja numer 2 informacji wyświetlanych na stronie startowej</label>
+                <input asp-for="LoyaltyCarouselData2" class="form-control" />
+                <span asp-validation-for="LoyaltyCarouselData2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyCarouselData3" class="control-label">Pozycja numer 3 informacji wyświetlanych na stronie startowej</label>
+                <input asp-for="LoyaltyCarouselData3" class="form-control" />
+                <span asp-validation-for="LoyaltyCarouselData3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyCarouselData4" class="control-label">Pozycja numer 4 informacji wyświetlanych na stronie startowej</label>
+                <input asp-for="LoyaltyCarouselData4" class="form-control" />
+                <span asp-validation-for="LoyaltyCarouselData4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyCarouselData5" class="control-label">Pozycja numer 5 informacji wyświetlanych na stronie startowej</label>
+                <input asp-for="LoyaltyCarouselData5" class="form-control" />
+                <span asp-validation-for="LoyaltyCarouselData5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Wróc do strony głównej</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

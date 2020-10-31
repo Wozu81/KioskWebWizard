@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KioskWebWizard.Context;
+using KioskWebWizard.Services;
+using KioskWebWizard.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +35,7 @@ namespace KioskWebWizard
                 builder.UseSqlServer(config);
             });
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<KioskWebWizardContext>();
-            //services.AddScoped<IPlanService, PlanService>();
+            services.AddScoped<IKioskService, KioskService>();
             //services.AddScoped<IRecipeService, RecipeService>();
             //services.AddScoped<IDashboardService, DashboardService>();
 

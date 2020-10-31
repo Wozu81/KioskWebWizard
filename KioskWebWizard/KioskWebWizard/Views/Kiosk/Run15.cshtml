@@ -1,0 +1,14 @@
+﻿@model KioskWebWizard.ViewModel.Kiosk.Run.KioskRun15CreateUserViewModel
+
+@{
+    ViewData["Title"] = "Run15";
+}
+<h2 class="pt-lg-5">Witamy w programie stałego klienta!</h2>
+<h4 class="pt-lg-1">Oto Twój unikatowy numer klienta. Został on także wysłany do Ciebie na podany adres e-mail</h4>
+<hr />
+<div class="text-center">
+    <h1>@Html.DisplayFor(model => model.LoyaltyID)</h1>
+</div>
+<div class="d-flex justify-content-center pt-3">
+    <button type="button" class="btn btn-success btn-lg " onclick="window.location='@Url.Action("Run", "Kiosk", new { KioskID = Model.OriginalKioskID })'">OK!</button>
+</div>

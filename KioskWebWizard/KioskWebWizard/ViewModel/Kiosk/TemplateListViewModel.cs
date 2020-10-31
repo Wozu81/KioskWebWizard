@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace KioskWebWizard.ViewModel.Kiosk
 {
-    public class KioskListViewModel
+    public class TemplateListViewModel
     {
         public int ID { get; set; }
-        public string Name { get; set; }
         public string TemplateName { get; set; }
     }
 }

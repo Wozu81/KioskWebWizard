@@ -1,0 +1,49 @@
+﻿@model KioskWebWizard.ViewModel.Kiosk.Run.KioskRun1ViewModelPart1
+
+@{
+    ViewData["Title"] = "Run1";
+}
+<div class="container">
+    <h1>@Model.LoyaltyName</h1>
+    <p class="lead">@Model.LoyaltyDescription</p>
+</div>
+<div class="container bg-secondary text-white heig">
+    <div id="carouselContent" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active text-center p-xl-5">
+                <p>@Model.LoyaltyCarouselData1</p>
+            </div>
+            <div class="carousel-item text-center p-xl-5">
+                <p>@Model.LoyaltyCarouselData2</p>
+            </div>
+            <div class="carousel-item text-center p-xl-5">
+                <p>@Model.LoyaltyCarouselData3</p>
+            </div>
+            <div class="carousel-item text-center p-xl-5">
+                <p>@Model.LoyaltyCarouselData4</p>
+            </div>
+            <div class="carousel-item text-center p-xl-5">
+                <p>@Model.LoyaltyCarouselData5</p>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<div class="container text-center p-5">
+    <button type="button" class="btn btn-success btn-lg" onclick="window.location='@Url.Action("Run11", "Kiosk")'">Wstąp już Dziś!</button>
+</div>

@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <ConnectionString>Data Source=.\sqlexpress;Initial Catalog=KioskWizard;Integrated Security=True</ConnectionString>
+  <ConnectionString>Data Source=.\sqlexpress;Initial Catalog=KioskWizardSQL;Integrated Security=True</ConnectionString>
 </root>

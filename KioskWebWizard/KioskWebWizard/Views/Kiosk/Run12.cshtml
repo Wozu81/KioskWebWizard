@@ -1,0 +1,42 @@
+﻿@model KioskWebWizard.ViewModel.Kiosk.Run.KioskRun12CreateUserViewModel
+
+@{
+    ViewData["Title"] = "Run12";
+}
+
+<h3 class="pt-lg-5">Podaj nam proszę, Twoje Imię i Nazwisko</h3>
+<hr />
+<div class="table text-md-center d-flex justify-content-center pt-lg-5">
+    <div class="col-md-4">
+        <form asp-action="Run12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label">Imię</label>
+                <input asp-for="Firstname" class="form-control" />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label">Nazwisko</label>
+                <input asp-for="Lastname" class="form-control" />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span>
+                    <label asp-for="AllowAddress" class="control-label">Czy chcesz otrzymywać od Nas przesyłki i dodatkowe informacje na Twój adres zamieszkania?</label>
+                    <input asp-for="AllowAddress" class="form-control" />
+                </span>
+                <span asp-validation-for="AllowAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dalej" class="btn btn-primary" />
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
