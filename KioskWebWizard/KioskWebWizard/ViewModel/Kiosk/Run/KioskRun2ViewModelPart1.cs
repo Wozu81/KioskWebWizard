@@ -4,13 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KioskWebWizard.Models
+namespace KioskWebWizard.ViewModel.Kiosk.Run
 {
-    public class KioskMapTemplateDataModel
+    public class KioskRun2ViewModelPart1
     {
-        public int ID { get; set; }
+        public int OriginalKioskNo { get; set; }
         [StringLength(50)]
         public string MapName { get; set; }
-        public ICollection<KioskModel> Kiosks { get; set; }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<KioskWebWizard.ViewModel.Kiosk.KioskListViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Spis wszystkich utworzonych kiosków</h2>
+<p>
+    <a asp-action="Create">Utwórz nowy kiosk</a>
+</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TemplateName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TemplateName)
+            </td>
+            <td>
+                @Html.ActionLink("Edycja", "Edit", new { KioskID = item.ID }) |
+                @Html.ActionLink("Szczegóły", "Details", new { KioskID = item.ID }) |
+                @Html.ActionLink("Usuń", "Delete", new { KioskID = item.ID }) |
+                @Html.ActionLink("Uruchom", "Run", new { KioskID = item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -12,8 +12,6 @@ namespace KioskWebWizard.Models
         public int ID { get; set; }
         [Required]
         public string TemplateName { get; set; }
-        [Required]
-        [ForeignKey("TemplateTypeID")]
-        public TemplateTypeModel TemplateType { get; set; }
+        public ICollection<KioskModel> Kiosks { get; set; }
     }
 }

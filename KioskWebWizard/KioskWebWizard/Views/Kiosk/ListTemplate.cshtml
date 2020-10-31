@@ -1,0 +1,42 @@
+﻿@model IEnumerable<KioskWebWizard.ViewModel.Kiosk.TemplateListViewModel>
+
+@{
+    ViewData["Title"] = "ListTemplate";
+}
+
+<h2>Spis wszystkich utworzonych szablonów</h2>
+<p>
+    <a asp-action="CreateTemplate">Utwórz nowy szablon</a>
+</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TemplateName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edycja", "EditTemplate", new { id = item.ID }) |
+                    @Html.ActionLink("Szczegóły", "DetailsTemplate", new { id = item.ID }) |
+                    @Html.ActionLink("Usuń", "DeleteTemplate", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

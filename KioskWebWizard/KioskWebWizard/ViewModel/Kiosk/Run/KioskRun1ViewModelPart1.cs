@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KioskWebWizard.Models
+namespace KioskWebWizard.ViewModel.Kiosk.Run
 {
-    public class KioskLoyaltyTemplateDataModel
+    public class KioskRun1ViewModelPart1
     {
-        public int ID { get; set; }
         [StringLength(50)]
         public string LoyaltyName { get; set; }
         public string LoyaltyDescription { get; set; }
@@ -19,6 +18,6 @@ namespace KioskWebWizard.Models
         public string? LoyaltyCarouselData4 { get; set; }
         public string? LoyaltyCarouselData5 { get; set; }
 #nullable disable
-        public ICollection<KioskModel> Kiosks { get; set; }
+        public int OriginalKioskID { get; set; }
     }
 }
